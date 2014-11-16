@@ -22,6 +22,8 @@ get '/' do
   erb :index
 end
 
+get '/legislator-positoins'
+
 post '/parse-form' do
   create_issue(params)
 end
@@ -29,6 +31,6 @@ end
 private
 
 def create_issue(options = {})
-  client = Octokit::Client.new(:login => 'clime-hater', :password =>'waffles1234') 
+  client = Octokit::Client.new(:login => settings.github_name, :password =>settings.github_pass) 
   client.create_issue('elbosque/climate-change-positions', 'Climehate', options.to_yaml, {:labels => 'label' })
 end

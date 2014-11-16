@@ -2,13 +2,26 @@
 <h3>- Appreciate</h3>
 
 <form action='/parse-form' method='post'>
-  <p><label for="statement">Statement link</label>
-  <label for="statement_date">Statement date</label></p>
   <p>
-    <textarea name="statement" id='statement'></textarea>
+    <label for="statement">Statement link</label>
+    <input name="statement" id='statement'></input>
+  </p>
+  <p>
+    <label for="statement_date">Statement date</label>
     <input type="date" name="statement_date" id='statement_date'>
   </p>
   <p>
+    <label for="bioguide">Politician</label>
+    <select name="bioguide">
+      <% @legislator_positions.each do |lp| %>
+        <option value="<%= lp['id']['bioguide']%>">
+          <%= lp['id']['name'] %>
+        </option>
+      <% end %>
+    </select>
+  </p>
+  <p>
+    <label for='exist'>Do they think climate change exists?</label>
     <select name='exist'>
       <option value='True'>Yes</option>
       <option value='False'>No</option>
@@ -16,6 +29,7 @@
     </select>
   </p>
   <p>
+    <label for='exist'>Do they think that humans contribute to climate change?</label>
     <select name='contribute'>
       <option value='True'>Yes</option>
       <option value='False'>No</option>
@@ -23,6 +37,7 @@
     </select>
   </p>
   <p>
+    <label for='evasive'>Was the politician's statement evasive?</label>
     <select name='evasive'>
       <option value='True'>Yes</option>
       <option value='False'>No</option>

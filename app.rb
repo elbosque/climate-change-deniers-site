@@ -18,13 +18,14 @@ configure do
   set :mongo_db, conn.db('waffle_house')
 end
 
-get '/' do 
+get '/' do
+  @legislator_positions = settings.mongo_db['climate_change_positions'].find
   erb :index
 end
 
-get '/legislator-positions' do
-
-end
+#get '/legislator-positions' do
+#  return settings.mongo_db['climate_change_positions'].find
+#end
 
 post '/parse-form' do
   create_issue(params)
@@ -34,5 +35,5 @@ private
 
 def create_issue(options = {})
   client = Octokit::Client.new(:login => settings.github_name, :password =>settings.github_pass) 
-  client.create_issue('elbosque/climate-change-positions', 'Climehate', options.to_yaml, {:labels => 'label' })
+  client.create_issue('elbosque/climate-change-positions', options["bioguide"], options.to_yaml, {:labels => 'label' })
 end

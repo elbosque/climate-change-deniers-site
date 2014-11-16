@@ -1,4 +1,5 @@
 require 'sinatra'
+require "sinatra/config_file"
 require 'net/http'
 require 'uri'
 

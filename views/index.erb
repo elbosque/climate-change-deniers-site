@@ -1,3 +1,33 @@
 <h2>Don't climehate</h2>
 <h3>- Appreciate</h3>
-<a href="https://github.com/login/oauth/authorize/?client_id=aca900b2e5f04bd96f00">Submit</a>  
+
+<form action='/parse-form' method='post'>
+  <p><label for="statement">Statement link</label>
+  <label for="statement_date">Statement date</label></p>
+  <p>
+    <textarea name="statement" id='statement'></textarea>
+    <input type="date" name="statement_date" id='statement_date'>
+  </p>
+  <p>
+    <select name='exist'>
+      <option value='True'>Yes</option>
+      <option value='False'>No</option>
+      <option value='Nil'>Not clear</option>
+    </select>
+  </p>
+  <p>
+    <select name='contribute'>
+      <option value='True'>Yes</option>
+      <option value='False'>No</option>
+      <option value='Nil'>Not clear</option>
+    </select>
+  </p>
+  <p>
+    <select name='evasive'>
+      <option value='True'>Yes</option>
+      <option value='False'>No</option>
+      <option value='Nil'>Not clear</option>
+    </select>
+  </p>
+  <input type='submit'>
+</form>

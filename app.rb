@@ -3,6 +3,8 @@ require "sinatra/config_file"
 require 'net/http'
 require 'uri'
 
+config_file 'config.yml'
+
 get '/' do 
   erb :index
 end

@@ -22,7 +22,9 @@ get '/' do
   erb :index
 end
 
-get '/legislator-positoins'
+get '/legislator-positions' do
+
+end
 
 post '/parse-form' do
   create_issue(params)

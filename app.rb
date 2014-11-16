@@ -33,6 +33,10 @@ end
 
 private
 
+def get_file(bioguide)
+  
+end
+
 def create_issue(options = {})
   client = Octokit::Client.new(:login => settings.github_name, :password =>settings.github_pass) 
   client.create_issue('elbosque/climate-change-positions', options["bioguide"], options.to_yaml, {:labels => 'label' })

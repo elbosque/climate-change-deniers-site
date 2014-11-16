@@ -6,6 +6,7 @@ require 'octokit'
 require 'yaml'
 require 'json/ext'
 require 'mongo'
+require 'byebug'
 
 config_file './config.yml'
 
@@ -14,7 +15,7 @@ include Mongo
 configure do
   conn = MongoClient.new("localhost", 27017)
   set :mongo_connection, conn
-  set :mongo_db, conn.db('climate_change_positions')
+  set :mongo_db, conn.db('waffle_house')
 end
 
 get '/' do 

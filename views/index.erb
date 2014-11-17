@@ -1,10 +1,13 @@
 <html>
   <head>
     <title>Climate Wafflers</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" href="/stylesheets/app.css"/>
+    <%= js :modernizr %>
   </head>
   <body>
     <img src="images/logo.png">
+    <%= js :libs %>
+    <%= js :application %>
     <form action='/parse-form' method='post'>
       <p>
         <label for="statement">Statement link</label>

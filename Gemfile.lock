@@ -46,7 +46,7 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
-    sass (3.4.8)
+    sass (3.3.14)
     sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -83,6 +83,7 @@ DEPENDENCIES
   mongo
   octokit
   rake
+  sass (~> 3.3.0)
   shotgun
   sinatra
   sinatra-assetpack

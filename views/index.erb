@@ -10,8 +10,8 @@
     <%= js :application %>
     <form action='/parse-form' method='post'>
       <p>
-        <label for="statement">Statement link</label>
-        <input name="statement" id='statement'></input>
+        <label for="proof">Statement link</label>
+        <input name="proof" id='proof'></input>
       </p>
       <p>
         <label for="statement_date">Statement date</label>
@@ -36,8 +36,8 @@
         </select>
       </p>
       <p>
-        <label for='exist'>Do they think that humans contribute to climate change?</label>
-        <select name='contribute'>
+        <label for='anthropogenic'>Do they think that humans contribute to climate change?</label>
+        <select name='anthropogenic'>
           <option value='True'>Yes</option>
           <option value='False'>No</option>
           <option value='Nil'>Not clear</option>
@@ -48,7 +48,6 @@
         <select name='evasive'>
           <option value='True'>Yes</option>
           <option value='False'>No</option>
-          <option value='Nil'>Not clear</option>
         </select>
       </p>
       <input type='submit'>

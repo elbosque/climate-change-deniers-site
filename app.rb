@@ -58,12 +58,12 @@ end
 
 def create_pull_request(options = {})
   client = Octokit::Client.new(:login => ENV['GITHUB_NAME'], :password => ENV['GITHUB_PASS']) 
+  master_yaml = client.contents("elbosque/climate-change-positions", path: "politicians/#{options['bioguide']}.yml")
   #client.create_issue('elbosque/climate-change-positions', options["bioguide"], options.to_yaml, {:labels => 'label' })
-  yaml_blob_hash = `git hash-object #{ENV['CCD_DATA_DIRECTORY']}/climate-change-positions/politicians/#{options["bioguide"]}.yml`
-  yaml_blob = client.blob("clime-hater/scratch", yaml_blob_hash.strip())
-  current_leg_hash = YAML.load(Base64.decode64(yaml_blob[:content]))
+  master_yaml_hash = YAML.load(Base64.decode64(master_yaml[:content]))
   return false unless has_all_options?(options)
-  new_leg_hash = resolve_yaml_disputes(current_leg_hash, options)
+  new_leg_hash = resolve_yaml_disputes(master_yaml_hash, options)
+  byebug
 end
 
 def has_all_options?(options)

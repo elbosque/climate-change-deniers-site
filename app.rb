@@ -58,12 +58,27 @@ end
 
 def create_pull_request(options = {})
   client = Octokit::Client.new(:login => ENV['GITHUB_NAME'], :password => ENV['GITHUB_PASS']) 
-  master_yaml = client.contents("elbosque/climate-change-positions", path: "politicians/#{options['bioguide']}.yml")
-  #client.create_issue('elbosque/climate-change-positions', options["bioguide"], options.to_yaml, {:labels => 'label' })
-  master_yaml_hash = YAML.load(Base64.decode64(master_yaml[:content]))
+  master_branch = Octokit.branch(ENV["CLIMATE_CHANGE_POSITIONS_REPO"], "master")
+  current_leg_yaml = client.contents(ENV["CLIMATE_CHANGE_POSITIONS_REPO"], path: "politicians/#{options['bioguide']}.yml")
+  current_leg_yaml_hash = YAML.load(Base64.decode64(current_leg_yaml[:content]))
   return false unless has_all_options?(options)
-  new_leg_hash = resolve_yaml_disputes(master_yaml_hash, options)
-  byebug
+  new_branch_id = "#{options[:bioguide]}-#{Time.now.to_i}"
+  client.create_ref(ENV["CLIMATE_CHANGE_POSITIONS_REPO"], "heads/#{new_branch_id}", master_branch[:commit][:sha])
+  new_leg_hash = resolve_yaml_disputes(current_leg_yaml_hash, options)
+  updated_leg_yaml = client.update_contents(
+    ENV["CLIMATE_CHANGE_POSITIONS_REPO"],
+    "politicians/#{options['bioguide']}.yml",
+    "Updating #{options['bioguide']} with #{options['proof']}",
+    current_leg_yaml[:sha],
+    new_leg_hash.to_yaml,
+    :branch => new_branch_id
+  )
+  client.create_pull_request(
+    ENV["CLIMATE_CHANGE_POSITIONS_REPO"],
+    "master",
+    new_branch_id,
+    "Updating #{options['bioguide']} with #{options['proof']}", options["comment"]
+  ) 
 end
 
 def has_all_options?(options)
